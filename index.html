@@ -1,30 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="style.css" type="text/css" rel="stylesheet">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <script>
-
-      $(document).ready(function(){
+      function updateTweets() {
         var $tweetBlock = $('tweetBlock');
         $tweetBlock.html('');
-
+        
+        var displayedTweets = 0;
         var index = streams.home.length - 1;
-        while(index >= 0){
+        while(index >= 0) {
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
+          var $tweet = $('<div class="tweet"></div>');
+          $tweet.attr('id', 'tweetNum' + index);
           $tweet.text(`${tweet.created_at} @${tweet.user}: ${tweet.message}`)
           $tweet.appendTo($tweetBlock);
-          index -= 1;
+          index --;
+          displayedTweets++;
         }
-
-      });
-
+        console.log(displayedTweets);
+      }
+      // should be running when page is opened, IS NOT CURRENTLY
+      //$(document).ready(updateTweets());
     </script>
   </head>
   <body>
-    <tweetBlock>
+    <div>
+      <name>[Ethan]</name><statement> Is this going to work?</statement>
+    </div>
+    <button onclick="updateTweets()">Update</button>
+    <div class="well" id="tweet-well">
+      <tweetBlock>
 
-    </tweetBlock>
+      </tweetBlock>
+    </div>
   </body>
 </html>

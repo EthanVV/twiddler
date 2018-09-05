@@ -1,0 +1,15 @@
+body {
+}
+
+name {
+	color: red;
+}
+
+
+.tweet {
+	background-color: #DBEDFF;
+  width: 80vw;
+  border: 2px solid lightblue;
+  padding: 15px;
+  margin: 15px;
+}
