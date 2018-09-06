@@ -13,24 +13,32 @@
         var index = streams.home.length - 1;
         while(index >= 0) {
           var tweet = streams.home[index];
-          var $tweet = $('<div class="tweet"></div>');
-          $tweet.attr('id', 'tweetNum' + index);
-          $tweet.text(`${tweet.created_at} @${tweet.user}: ${tweet.message}`)
+          var $tweet = $(`<div class="tweet" id="tweet${index}">
+            <div class="user" onclick="temp()">@${tweet.user}</div>
+            <div class="timeStamp" onclick="temp2()">${tweet.created_at.toDateString()}</div>
+            <p class="message">${tweet.message}</p>
+            </div>
+            `);
+          //$tweet.text(`${tweet.created_at} @${tweet.user}: ${tweet.message}`)
           $tweet.appendTo($tweetBlock);
           index --;
           displayedTweets++;
         }
         console.log(displayedTweets);
       }
+
+      function temp() {
+
+      }
+
+      function temp2() {
+
+      }
       // should be running when page is opened, IS NOT CURRENTLY
-      //$(document).ready(updateTweets());
     </script>
   </head>
   <body>
-    <div>
-      <name>[Ethan]</name><statement> Is this going to work?</statement>
-    </div>
-    <button onclick="updateTweets()">Update</button>
+    <button id="refresh" onclick="updateTweets()">Update</button>
     <div class="well" id="tweet-well">
       <tweetBlock>
 
