@@ -4,40 +4,39 @@
     <link href="style.css" type="text/css" rel="stylesheet">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="scripts.js"></script>
     <script>
       function updateTweets() {
         var $tweetBlock = $('tweetBlock');
         $tweetBlock.html('');
         
-        var displayedTweets = 0;
         var index = streams.home.length - 1;
         while(index >= 0) {
           var tweet = streams.home[index];
           var $tweet = $(`<div class="tweet" id="tweet${index}">
-            <div class="user" onclick="temp()">@${tweet.user}</div>
-            <div class="timeStamp" onclick="temp2()">${tweet.created_at.toDateString()}</div>
+            <div class="user" onclick="getHistory(${'tweet' + index})">@${tweet.user}</div>
+            <div class="timeStamp">${getTimeStatement(tweet)}</div>
             <p class="message">${tweet.message}</p>
-            </div>
-            `);
+            </div>`);
           //$tweet.text(`${tweet.created_at} @${tweet.user}: ${tweet.message}`)
           $tweet.appendTo($tweetBlock);
           index --;
-          displayedTweets++;
         }
-        console.log(displayedTweets);
       }
 
-      function temp() {
+      function getHistory(id) {
+        //var posts = streams.home.filter(tweet => tweet.user === id.find(user).text);
 
-      }
 
-      function temp2() {
+        $(id).after("is it working?");
+      };
 
-      }
       // should be running when page is opened, IS NOT CURRENTLY
     </script>
+    <title>Twiddler</title>
   </head>
   <body>
+    <h1>Twiddler</h1>
     <button id="refresh" onclick="updateTweets()">Update</button>
     <div class="well" id="tweet-well">
       <tweetBlock>

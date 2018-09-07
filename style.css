@@ -6,6 +6,18 @@ body {
 	align-items: center;
 }
 
+h1 {
+	color: black;
+	font-size: 600%;
+	text-align: center;
+	text-shadow:
+		-1px -1px 0 white,
+		1px -1px 0 white,
+		-1px 1px 0 white,
+		1px 1px 0 white;
+	padding: 10px;
+}
+
 .user {
 	font-size: 110%;
 	text-transform: underline;
