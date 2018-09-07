@@ -4,7 +4,6 @@
     <link href="style.css" type="text/css" rel="stylesheet">
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
-    <script src="scripts.js"></script>
     <script>
       function updateTweets() {
         var $tweetBlock = $('tweetBlock');
@@ -14,34 +13,61 @@
         while(index >= 0) {
           var tweet = streams.home[index];
           var $tweet = $(`<div class="tweet" id="tweet${index}">
-            <div class="user" onclick="getHistory(${'tweet' + index})">@${tweet.user}</div>
+            <div class="user" onclick="getHistory(${'tweet' + index}, '${tweet.user}')">@${tweet.user}</div>
             <div class="timeStamp">${getTimeStatement(tweet)}</div>
             <p class="message">${tweet.message}</p>
             </div>`);
-          //$tweet.text(`${tweet.created_at} @${tweet.user}: ${tweet.message}`)
           $tweet.appendTo($tweetBlock);
           index --;
         }
       }
 
-      function getHistory(id) {
-        //var posts = streams.home.filter(tweet => tweet.user === id.find(user).text);
+      function getHistory(id, user) {
+        var posts = streams.home.filter(tweet => tweet.user === user);
+        var $history = $('history');
+        $history.html('');
 
-
-        $(id).after("is it working?");
+        var index = posts.length - 1;
+        while (index >= 0) {
+          var tweet = posts[index];
+          var $tweet = $(`<div class="historical" id="hist${index}">
+            <div class="timeStamp">${getTimeStatement(tweet)}</div>
+            <p class="message">${tweet.message}</p>
+            </div>`);
+          $(id).after($tweet);
+          index--;
+        }
       };
 
-      // should be running when page is opened, IS NOT CURRENTLY
+      function getTimeStatement(tweet) {
+        var secondsSince = (new Date().getTime() - tweet.created_at.getTime()) / 1000;
+        var justNowThreshold = 10;
+        var minuteInSeconds = 60;
+        var hourInSeconds = minuteInSeconds*60
+        var dayInSeconds = hourInSeconds*24;
+        
+        if (secondsSince < justNowThreshold) {
+          return 'just now';
+        } else if (secondsSince < minuteInSeconds) {
+          return `${Math.floor(secondsSince)} seconds ago`;
+        } else if (secondsSince < hourInSeconds) {
+          return `${Math.floor(secondsSince / minuteInSeconds)} minutes ago`;
+        } else if (secondsSince < dayInSeconds) {
+          return `${Math.floor(secondsSince / hourInSeconds)} hours ago`;
+        } else {
+          return tweet.created_at.toDateString();
+        }
+      };
+       
     </script>
     <title>Twiddler</title>
   </head>
   <body>
     <h1>Twiddler</h1>
     <button id="refresh" onclick="updateTweets()">Update</button>
-    <div class="well" id="tweet-well">
       <tweetBlock>
 
       </tweetBlock>
-    </div>
+    <history></history>
   </body>
 </html>

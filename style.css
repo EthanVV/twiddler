@@ -2,10 +2,6 @@ body {
 	background: #DBEDFF;
 }
 
-#refresh {
-	align-items: center;
-}
-
 h1 {
 	color: black;
 	font-size: 600%;
@@ -16,6 +12,24 @@ h1 {
 		-1px 1px 0 white,
 		1px 1px 0 white;
 	padding: 10px;
+}
+
+#refresh {
+	text-align: center;
+}
+
+.historical {
+	position: relative;
+  left: 50px;
+	background-color: white;
+  width: 550px;
+  height: 40px;
+  border: 2px solid black;
+  border-radius: 25px;
+  padding: 20px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-bottom: 10px;
 }
 
 .user {
